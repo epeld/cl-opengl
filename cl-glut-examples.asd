@@ -29,10 +29,9 @@
 ;;; THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 ;;; (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 ;;; OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 (defsystem cl-glut-examples
   :description "Examples using cl-opengl, cl-glu and cl-glut."
-  :depends-on (cffi cl-opengl cl-glu cl-glut)
+  :depends-on (cffi cl-opengl cl-glu cl-glut #+darwin trivial-main-thread)
   :components
   ((:module "examples"
     :components
