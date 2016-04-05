@@ -72,4 +72,9 @@
     (#\Esc (glut:destroy-current-window))))
 
 (defun rb-movelight ()
-  (glut:display-window (make-instance 'movelight-window)))
+  #-darwin 
+  (glut:display-window (make-instance 'movelight-window))
+  
+  #+darwin 
+  (trivial-main-thread:with-body-in-main-thread (:blocking t)
+            (glut:display-window (make-instance 'movelight-window))))

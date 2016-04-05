@@ -58,4 +58,9 @@
       (#\Esc (glut:destroy-current-window)))))
 
 (defun rb-planet ()
-  (glut:display-window (make-instance 'planet-window)))
+  #-darwin
+  (glut:display-window (make-instance 'planet-window))
+  
+  #+darwin
+  (trivial-main-thread:with-body-in-main-thread (:blocking t)
+    (glut:display-window (make-instance 'planet-window))))

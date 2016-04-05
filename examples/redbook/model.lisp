@@ -66,4 +66,9 @@
     (glut:destroy-current-window)))
 
 (defun rb-model ()
-  (glut:display-window (make-instance 'model-window)))
+  #-darwin 
+  (glut:display-window (make-instance 'model-window))
+  
+  #+darwin 
+  (trivial-main-thread:with-body-in-main-thread (:blocking t)
+            (glut:display-window (make-instance 'model-window))))

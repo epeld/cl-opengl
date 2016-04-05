@@ -76,4 +76,6 @@
     (glut:destroy-current-window)))
 
 (defun rb-lines ()
-  (glut:display-window (make-instance 'lines-window)))
+  #-darwing (glut:display-window (make-instance 'lines-window))
+  #+darwin (trivial-main-thread:with-body-in-main-thread (:blocking t)
+    (glut:display-window (make-instance 'lines-window))))

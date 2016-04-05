@@ -64,4 +64,9 @@
       (#\Esc (glut:destroy-current-window)))))
 
 (defun rb-robot ()
-  (glut:display-window (make-instance 'robot-window)))
+  #-darwin
+  (glut:display-window (make-instance 'robot-window))
+  
+  #+darwin
+  (trivial-main-thread:with-body-in-main-thread (:blocking t)
+    (glut:display-window (make-instance 'robot-window))))

@@ -45,4 +45,9 @@
     (#\Esc (glut:destroy-current-window))))
 
 (defun rb-smooth ()
-  (glut:display-window (make-instance 'smooth-window)))
+  #-darwin
+  (glut:display-window (make-instance 'smooth-window))
+  
+  #+darwin
+  (trivial-main-thread:with-body-in-main-thread (:blocking t)
+    (glut:display-window (make-instance 'smooth-window))))

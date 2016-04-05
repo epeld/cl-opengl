@@ -97,7 +97,12 @@
 ;;; XXX verificar GL_VERSION_1_1
 
 (defun rb-varray ()
-  (glut:display-window (make-instance 'varray-window)))
+  #-darwin
+  (glut:display-window (make-instance 'varray-window))
+  
+  #+darwin
+  (trivial-main-thread:with-body-in-main-thread (:blocking t)
+    (glut:display-window (make-instance 'varray-window))))
 
 
 

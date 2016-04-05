@@ -41,4 +41,6 @@
   (gl:flush))
 
 (defun rb-hello ()
-  (glut:display-window (make-instance 'hello-window)))
+  #-darwing (glut:display-window (make-instance 'hello-window))
+  #+darwin (trivial-main-thread:with-body-in-main-thread (:blocking t)
+    (glut:display-window (make-instance 'hello-window))))

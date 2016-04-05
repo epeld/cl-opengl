@@ -80,4 +80,9 @@
     (glut:destroy-current-window)))
 
 (defun rb-polys ()
-  (glut:display-window (make-instance 'polys-window)))
+  #-darwin
+  (glut:display-window (make-instance 'polys-window))
+  
+  #+darwin
+  (trivial-main-thread:with-body-in-main-thread (:blocking t)
+    (glut:display-window (make-instance 'polys-window))))

@@ -54,4 +54,9 @@
     (glut:destroy-current-window)))
 
 (defun rb-list ()
-  (glut:display-window (make-instance 'list-window)))
+  #-darwin 
+  (glut:display-window (make-instance 'list-window))
+  
+  #+darwin 
+  (trivial-main-thread:with-body-in-main-thread (:blocking t)
+    (glut:display-window (make-instance 'list-window))))

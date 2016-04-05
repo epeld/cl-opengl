@@ -141,4 +141,9 @@
     (glu:tess-delete tobj)))
 
 (defun rb-tess-wind ()
-  (glut:display-window (make-instance 'tess-wind-window)))
+  #-darwin
+  (glut:display-window (make-instance 'tess-wind-window))
+  
+  #+darwin
+  (trivial-main-thread:with-body-in-main-thread (:blocking t)
+    (glut:display-window (make-instance 'tess-wind-window))))

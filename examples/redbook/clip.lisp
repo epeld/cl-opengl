@@ -47,4 +47,9 @@
     (glut:destroy-current-window)))
 
 (defun rb-clip ()
-  (glut:display-window (make-instance 'clip-window)))
+  #-darwin 
+  (glut:display-window (make-instance 'clip-window))
+  
+  #+darwin 
+  (trivial-main-thread:with-body-in-main-thread (:blocking t)
+    (glut:display-window (make-instance 'clip-window))))

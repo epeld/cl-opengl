@@ -44,4 +44,6 @@
     (glut:destroy-current-window)))
 
 (defun rb-cube ()
-  (glut:display-window (make-instance 'cube-window)))
+  #-darwin (glut:display-window (make-instance 'cube-window))
+  #+darwin (trivial-main-thread:with-body-in-main-thread (:blocking t)
+    (glut:display-window (make-instance 'cube-window))))

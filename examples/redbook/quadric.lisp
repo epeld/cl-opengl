@@ -100,4 +100,9 @@
     (glut:destroy-current-window)))
 
 (defun rb-quadric ()
-  (glut:display-window (make-instance 'quadric-window)))
+  #-darwin
+  (glut:display-window (make-instance 'quadric-window))
+  
+  #+darwin
+  (trivial-main-thread:with-body-in-main-thread (:blocking t)
+    (glut:display-window (make-instance 'quadric-window))))

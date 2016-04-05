@@ -115,4 +115,9 @@
                      (nth i (aref vertex-data 3)))))))
 
 (defun rb-tess ()
-  (glut:display-window (make-instance 'tess-window)))
+  #-darwin
+  (glut:display-window (make-instance 'tess-window))
+  
+  #+darwin
+  (trivial-main-thread:with-body-in-main-thread (:blocking t)
+    (glut:display-window (make-instance 'tess-window))))
