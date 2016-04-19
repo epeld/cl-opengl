@@ -58,5 +58,9 @@
     (glut:destroy-current-window)))
 
 (defun rb-bezcurve ()
+  #-darwin
+  (glut:display-window (make-instance 'bezcurve-window))
+  
+  #+darwin
   (trivial-main-thread:with-body-in-main-thread (:blocking t)
     (glut:display-window (make-instance 'bezcurve-window))))

@@ -54,6 +54,6 @@
        (glut:disable-event w :idle)))))
 
 (defun rb-double ()
-  #-darwing (glut:display-window (make-instance 'double-window))
+  #-darwin (glut:display-window (make-instance 'double-window))
   #+darwin (trivial-main-thread:with-body-in-main-thread (:blocking t)
     (glut:display-window (make-instance 'double-window))))
